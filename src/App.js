@@ -73,8 +73,7 @@ const App = () => {
       </nav>
       <main>
         <div id="main-block">
-          <img alt="test" src="{item.backgroundImage}" />
-          <p>Welcome to the shop for wings and stuff. This is just a placeholder.</p>
+    <h1></h1>
           <div className="filter">
             <h1>Filter</h1>
             <label>
@@ -95,21 +94,37 @@ const App = () => {
             </label>
           </div>
         </div>
+              <h1>Locally Grown Fairy Wings! </h1>
         <div id="main-gallery">
           {filteredItems.map((item, index) => (
             <article key={index}>
               <a href={item.link}>
                 <img href={item.link} alt="item" src={item.img} />
-                <h2>{item.category }- ${item.price}<br />{item.name}</h2>
+                <h2>{item.category }<br />{item.name}<br />${item.price}</h2>
               </a>
             </article>
           ))}
         </div>
       </main>
       <footer>
-        <p>Footer</p>
-        <UpdateYear />
-      </footer>
+    <div className="footer-section">
+        <h3>About Merfairy Thistle</h3>
+        <p>Local fairy wings handmade and ready to ship</p>
+    </div>
+    <div className="footer-section">
+        <ul>
+        <li><h3>Links</h3></li>
+        <li><a href="#"><p>Login</p></a></li>
+        <li><a href="https://www.instagram.com/merfairythistle/"><p>Instagram</p></a></li>
+        <li><a href="https://www.etsy.com/shop/ThistlesWorkshop"><p>Etsy</p></a></li>
+        </ul>
+    </div>
+    <div className="footer-section">
+        <h3>Contact Us</h3>
+        <p>Email: hello@merfairythistles.com</p>
+    </div>
+</footer>
+
     </React.Fragment>
   );
 };
