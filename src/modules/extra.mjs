@@ -12,4 +12,5 @@ function Tester() {
 function Dater() {
   return <h2>Hi, I am a Car!</h2>;
 }
+
 export {MyComponent, Tester, Dater};
