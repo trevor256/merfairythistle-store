@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import ReactGA from 'react-ga';
 import axios from 'axios';
 import Papa from 'papaparse';
-import { MyComponent, Tester, Dater } from './modules/extra';
+import { MyComponent, Tester, UpdateYear } from './modules/extra';
 import './App.css';
 
 const App = () => {
@@ -11,6 +12,11 @@ const App = () => {
   const [showDigital, setShowDigital] = useState(false);
   const [showsticker, setShowsticker] = useState(false);
 
+    function initializeReactGA() {
+        ReactGA.initialize('G-9ZPEFPZSXD'); // Replace with your Google Analytics tracking ID
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5rySdYHSZZQW4n5Ai3QeVY4fVSH7IONsCd-lG9o4a4lMsIgKiGYIQyOfY-giPG-wvFPbq_Kp4mlB3/pub?output=csv');
@@ -18,6 +24,7 @@ const App = () => {
       setItems(data);
     };
     fetchData();
+    initializeReactGA();
   }, []);
 
   const filteredItems = items.filter(item => {
@@ -28,22 +35,32 @@ const App = () => {
     if (!showWings && !showDigital && !showsticker) return true;
     return false;
   });
-  
+    
   return (
     <React.Fragment>
       <nav>
         <div className="navitem">
           <h1>Merfairy Thistle</h1>
         </div>
-        <div className="navitem">
-          <p>Links</p>
-            <svg id="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.6 7.5">
-            <g fill="none" stroke="#fff">
-              <path strokeWidth=".7" d="M6 4.6V5c-.2.5-.6.7-1 .5l-.3-.1M2.6 2.8l.1-.6c.1-.4.5-.6 1-.4l.3.1"/>
-              <path strokeWidth="1" d="M5 3c.4.4.4 1 0 1.5L2.5 6.8c-.5.5-1.2.5-1.6 0l-.4-.3C.2 6 .2 5.3.6 4.9L2.4 3"/>
-              <path strokeWidth="1" d="M3.7 4.5c-.5-.4-.5-1 0-1.5L6 .6C6.4.2 7.2.2 7.6.6L8 1c.4.4.4 1.1 0 1.6L6.2 4.4"/>
-            </g>
-          </svg>
+<div className="navitem">
+  <div className="dropdown">
+    <div className="link-with-icon">
+      <p>Links</p>
+      <svg id="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.6 7.5">
+        <g fill="none" stroke="#fff">
+          <path strokeWidth=".7" d="M6 4.6V5c-.2.5-.6.7-1 .5l-.3-.1M2.6 2.8l.1-.6c.1-.4.5-.6 1-.4l.3.1"/>
+          <path strokeWidth="1" d="M5 3c.4.4.4 1 0 1.5L2.5 6.8c-.5.5-1.2.5-1.6 0l-.4-.3C.2 6 .2 5.3.6 4.9L2.4 3"/>
+          <path strokeWidth="1" d="M3.7 4.5c-.5-.4-.5-1 0-1.5L6 .6C6.4.2 7.2.2 7.6.6L8 1c.4.4.4 1.1 0 1.6L6.2 4.4"/>
+        </g>
+      </svg>
+    </div>
+    <div className="dropdown-content">
+      <ul>
+        <li><a href="https://www.instagram.com/merfairythistle/"><p>Instagram</p></a></li>
+        <li><a href="https://www.etsy.com/shop/ThistlesWorkshop"><p>Etsy</p></a></li>
+      </ul>
+    </div>
+  </div>
           <p>Login</p>
           <svg id="login-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.86 17.96">
     <g fill="none" stroke="#fff" strokeWidth="1.59" transform="translate(-5.12 -4.33)">
@@ -91,9 +108,7 @@ const App = () => {
       </main>
       <footer>
         <p>Footer</p>
-        <MyComponent />
-        <Tester />
-        <Dater />
+        <UpdateYear />
       </footer>
     </React.Fragment>
   );
